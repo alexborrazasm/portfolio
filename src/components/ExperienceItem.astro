@@ -1,0 +1,56 @@
+---
+import LinkGroup from './LinkGroup.astro';
+import DateBadge from './DateBadge.astro';
+
+interface Props {
+  title: string;
+  company: string;
+  date: string;
+  description: string;
+  githubUrl?: string;
+  githubUrlLabel?: string;
+  externalUrl?: string;
+  externalUrlLabel?: string;
+}
+
+const { title, company, date, description, ...links } = Astro.props;
+---
+
+<div class="experience-item">
+  <div class="header">
+    <div class="title-group">
+      <div class="title-row">
+        <h3 class="role-title">{title}</h3>
+        <LinkGroup {...links} />
+      </div>
+      <p class="company-name">{company}</p>
+    </div>
+    <DateBadge date={date} /> </div>
+  
+  <p class="description">
+    {description}
+  </p>
+</div>
+
+<style>
+  @reference "../styles/global.css";
+
+  .experience-item { @apply mb-4; last:mb-0; }
+  
+  .header { 
+    @apply flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1; 
+  }
+
+  .title-group { @apply flex-1; }
+  
+  .title-row { @apply flex items-center gap-2 flex-wrap; }
+
+  .role-title { @apply text-lg font-bold text-slate-900 leading-snug; }
+
+  .company-name { @apply text-accent font-semibold; }
+
+  .description { 
+    @apply mt-3 text-slate-600 leading-relaxed text-sm md:text-base; 
+  }
+
+</style>

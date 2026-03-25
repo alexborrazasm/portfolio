@@ -1,0 +1,49 @@
+---
+import GithubIcon from './icons/IconGithub.astro';
+const currentYear = new Date().getFullYear();
+---
+
+<footer>
+  <div class="footer-container">
+    <a
+      href="https://github.com/alexborrazasm/portfolio/"
+      target="_blank"
+      class="github-link group"
+    >
+      <GithubIcon class="github-icon" />
+      <span>Source code on GitHub</span>
+    </a>
+    
+    <span class="divider">|</span>
+
+    <p class="credits">
+      {currentYear} — Built with Astro & Tailwind
+    </p>
+  </div>
+</footer>
+
+<style>
+  @reference "../styles/global.css"; 
+
+  .footer-container {
+    @apply flex items-center justify-center gap-4 py-8;
+  }
+
+  .github-link {
+    @apply flex items-center gap-2 text-slate-400 hover:text-accent
+      transition-colors text-sm font-medium;
+  }
+
+  .github-icon {
+    @apply group-hover:rotate-12 transition-transform size-4.5;
+  }
+
+  .divider {
+    @apply text-slate-300 text-xs;
+  }
+
+  .credits {
+    @apply text-slate-400 text-xs;
+  }
+
+</style>

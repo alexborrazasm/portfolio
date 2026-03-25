@@ -1,0 +1,21 @@
+---
+interface Props {
+  date: string;
+}
+
+const { date } = Astro.props;
+---
+
+<time class="date-badge">
+  {date}
+</time>
+
+<style>
+  @reference "../styles/global.css";
+
+  .date-badge {
+    @apply text-sm font-bold text-slate-500 tabular-nums bg-slate-100 px-2 
+      py-0.5 rounded sm:bg-transparent sm:p-0 whitespace-nowrap;
+  }
+
+</style>

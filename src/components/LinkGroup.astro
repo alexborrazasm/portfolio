@@ -1,0 +1,54 @@
+---
+import IconGithub from './icons/IconGithub.astro';
+import IconExternalLink from './icons/IconExternalLink.astro';
+
+interface Props {
+  githubUrl?: string;
+  githubUrlLabel?: string;
+  externalUrl?: string;
+  externalUrlLabel?: string;
+}
+
+const { githubUrl, githubUrlLabel, externalUrl, externalUrlLabel } = Astro.props;
+---
+
+<div class="links-container">
+  {githubUrl && (
+    <a 
+      href={githubUrl} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      class="link-icon"
+      title={githubUrlLabel || "See on GitHub"}
+    >
+      <IconGithub class="size-5" />
+    </a>
+  )}
+
+  {externalUrl && (
+    <a 
+      href={externalUrl} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      class="link-icon"
+      title={externalUrlLabel || "Visit website"}
+    >
+      <IconExternalLink class="size-5" />
+    </a>
+  )}
+
+</div>
+
+<style>
+  @reference "../styles/global.css";
+
+  .links-container {
+    @apply flex items-center gap-2 flex-wrap;
+  }
+
+  .link-icon {
+    @apply flex items-center transition-all hover:scale-110 text-slate-700 
+      hover:text-accent;
+  }
+
+</style>

@@ -1,0 +1,146 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import ExperienceItem from '../components/ExperienceItem.astro';
+import IconDownload from '../components/icons/IconDownload.astro';
+import CommunityItem from '../components/ComunityItem.astro';
+---
+
+<Layout title="Alexandre Borrazás Mancebo - Portfolio" lang="en">
+  <main class="cv-paper">
+    <Hero
+      name="Alexandre Borrazás Mancebo"
+      role="Computer Engineer"
+      image="/photo.jpg" 
+      email="alexborrazasm@gmail.com"
+      linkedin="https://linkedin.com/in/alexborrazasm"
+      github="https://github.com/alexborrazasm"
+      birthDate="March 2, 1999"
+      location='A Coruña, Spain'
+      about="Computer Engineering student at UDC, driven by a genuine curiosity 
+	  	  to understand how technologies work and connect across different layers. 
+		    I grasp the logic behind every piece of software. I collaborate on 
+		    open-source and experimentation projects, applying the maker mindset 
+		    that defines my engineering approach."
+    />
+    
+    <Section title="Education">
+      <ExperienceItem 
+        title="Degree in Computer Engineering"
+        company="Universidade da Coruña (UDC)"
+        date="2023 — Present"
+        description="Specializing in Computer Engineering. Focused on understanding 
+        the full stack of computing, from low-level hardware to high-level software 
+        architectures."
+      />
+    </Section>
+    
+    <Section title="Projects">
+      <ExperienceItem 
+        title="Declarative Infrastructure & Homelab Platform"
+        company="Personal Home Lab & BricoLabs VPS"
+        date="2025 — Present"
+        description="Designed and maintained a self-hosted infrastructure using 
+          NixOS (Flakes) and Docker. Implemented declarative system configurations, 
+          container orchestration, and reproducible development environments 
+          across a VPS and on-premise server. Managed networking with VLAN 
+          segmentation (OpenWrt), automated backups of containerized services, 
+          and remote orchestration workflows. Explored Infrastructure as Code 
+          concepts and reproducibility principles similar to Terraform-based 
+          setups."
+        githubUrl="https://github.com/alexborrazasm/nixos-dotfiles" 
+      />
+      <ExperienceItem 
+        title="ESP32 Robot Telemetry & Configuration API"
+        company="Personal Project / BricoLabs"
+        date="2026 — Present"
+        description="Designed and implemented a lightweight HTTP/WebSocket API 
+          for telemetry collection and remote configuration of ESP32-based 
+          robots. Developed a hardware-agnostic abstraction layer to decouple 
+          network transport (WiFi/Ethernet) from application logic, enabling
+            flexible deployment across different connectivity setups. Implemented
+            real-time data streaming and structured endpoints to support
+            external client applications."
+        githubUrl="https://github.com/TMP-Robots/TMP-API"
+      />
+    </Section>
+    
+    <Section title="Honors & Awards">
+      <ExperienceItem 
+        title="First Prize Winner - HackUDC 2026"
+        company="Denodo Track"
+        date="2026"
+        description="Won the first prize in the Denodo challenge, demonstrating 
+          problem-solving skills, rapid prototyping, and efficient data handling 
+          under pressure."
+        githubUrl="https://github.com/InnovateXYZ/HackUDC2026",
+        externalUrl="https://devpost.com/software/k2-platform-hackudc-2026"
+        externalUrlLabel='See on Devpost'
+      />
+    </Section>
+
+    <Section title="Communities">
+      <CommunityItem 
+        name="Bricolabs"
+        role="Active Member"
+        url="https://bricolabs.cc"
+        description="Collaboration on open-source hardware and software projects. 
+          Focused on 'learning by doing' and digital fabrication."
+        date="2022 — Present",
+      />
+      <CommunityItem 
+        name="GPUL"
+        role="Active Member"
+        url="https://gpul.org"
+        description="Universidade da Coruña's Open Source Software Users Group. 
+          Promoting Free Software culture and technical workshops."
+        date="2023 — Present",
+      />
+    </Section>
+
+  </main>
+
+  <div class="download-btn-container">
+    <a 
+      href="/cv-alexandre.pdf" 
+      download 
+      class="download-btn"
+    >
+      <IconDownload class="size-5" />
+      <span>Download PDF</span>
+    </a>
+  </div>
+</Layout>
+
+<style>
+  @reference "../styles/global.css";
+
+  .cv-paper {
+    @apply max-w-4xl mx-auto bg-white shadow-2xl md:rounded-md border 
+      border-slate-200/50 min-h-[1100px] p-6 my-0 mb-8 md:p-12 md:my-6;
+  }
+
+  .download-btn {
+    @apply flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-md 
+           text-slate-900 font-bold rounded-full border border-white/50 
+           shadow-lg hover:bg-accent hover:text-white transition-all 
+           hover:scale-105 active:scale-95 print:hidden;
+  }
+
+  .download-btn-container {
+    @apply max-w-4xl mx-auto flex justify-center
+  }
+
+  /* For printing remove shadows and borders */
+  @media print {
+
+    .cv-paper {
+      @apply shadow-none border-none p-0 m-0;
+    }
+    main {
+      @apply p-0 m-0;
+    }
+  }
+
+</style>

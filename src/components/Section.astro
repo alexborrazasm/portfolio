@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<section>
+  <h2>
+    {title}
+  </h2>
+  <slot /> 
+</section>
+
+<style>
+  @reference "../styles/global.css";
+
+  section {
+    @apply pb-2 mb-2;
+  }
+
+  h2 {
+    @apply text-xl font-bold text-accent border-b-2 border-slate-200 mb-4 
+    uppercase tracking-wider;
+  }
+  
+</style>
