@@ -18,11 +18,12 @@ import CommunityItem from '../components/ComunityItem.astro';
       github="https://github.com/alexborrazasm"
       birthDate="March 2, 1999"
       location='A Coruña, Spain'
-      about="Computer Engineering student at UDC, driven by a genuine curiosity 
-	  	  to understand how technologies work and connect across different layers. 
-		    I grasp the logic behind every piece of software. I collaborate on 
-		    open-source and experimentation projects, applying the maker mindset 
-		    that defines my engineering approach."
+      about="Computer Engineering student at UDC with a strong focus on software 
+        architecture and system-level development. I build robust solutions by 
+        bridging the gap between hardware-constrained environments and high-level 
+        software design. From developing real-time APIs for robotics to engineering 
+        declarative environments, I apply a maker mindset to solve complex 
+        engineering challenges through clean and reproducible code."
     />
     
     <Section title="Education">
@@ -35,37 +36,7 @@ import CommunityItem from '../components/ComunityItem.astro';
         architectures."
       />
     </Section>
-    
-    <Section title="Projects">
-      <ExperienceItem 
-        title="Declarative Infrastructure & Homelab Platform"
-        company="Personal Home Lab & BricoLabs VPS"
-        date="2025 — Present"
-        description="Designed and maintained a self-hosted infrastructure using 
-          NixOS (Flakes) and Docker. Implemented declarative system configurations, 
-          container orchestration, and reproducible development environments 
-          across a VPS and on-premise server. Managed networking with VLAN 
-          segmentation (OpenWrt), automated backups of containerized services, 
-          and remote orchestration workflows. Explored Infrastructure as Code 
-          concepts and reproducibility principles similar to Terraform-based 
-          setups."
-        githubUrl="https://github.com/alexborrazasm/nixos-dotfiles" 
-      />
-      <ExperienceItem 
-        title="ESP32 Robot Telemetry & Configuration API"
-        company="Personal Project / BricoLabs"
-        date="2026 — Present"
-        description="Designed and implemented a lightweight HTTP/WebSocket API 
-          for telemetry collection and remote configuration of ESP32-based 
-          robots. Developed a hardware-agnostic abstraction layer to decouple 
-          network transport (WiFi/Ethernet) from application logic, enabling
-            flexible deployment across different connectivity setups. Implemented
-            real-time data streaming and structured endpoints to support
-            external client applications."
-        githubUrl="https://github.com/TMP-Robots/TMP-API"
-      />
-    </Section>
-    
+
     <Section title="Honors & Awards">
       <ExperienceItem 
         title="First Prize Winner - HackUDC 2026"
@@ -74,28 +45,79 @@ import CommunityItem from '../components/ComunityItem.astro';
         description="Won the first prize in the Denodo challenge, demonstrating 
           problem-solving skills, rapid prototyping, and efficient data handling 
           under pressure."
-        githubUrl="https://github.com/InnovateXYZ/HackUDC2026",
+        githubUrl="https://github.com/InnovateXYZ/HackUDC2026"
         externalUrl="https://devpost.com/software/k2-platform-hackudc-2026"
         externalUrlLabel='See on Devpost'
       />
     </Section>
+    
+    <Section title="Projects">
+      <ExperienceItem 
+        title="Declarative Infrastructure & Home Lab"
+        company="Self-hosted NixOS Ecosystem"
+        date="2025 — Present"
+        description="Engineered a fully reproducible infrastructure using NixOS 
+          (Flakes) and Docker across VPS and on-premise nodes. Implemented 
+          declarative system configs, automated backups, and network segmentation 
+          with OpenWrt (VLANs). Focused on Infrastructure as Code (IaC) and 
+          maintaining services for the BricoLabs community."
+        githubUrl="https://github.com/alexborrazasm/nixos-dotfiles" 
+      />
+      <ExperienceItem 
+        title="ESP32 Telemetry & Robotics API"
+        company="Personal Project / BricoLabs"
+        date="2026 — Present"
+        description="Architected a hardware-agnostic HTTP/WebSocket API for 
+        ESP32 robots. Developed a transport layer abstraction (WiFi/Ethernet) 
+        to decouple connectivity from logic. Features real-time data streaming 
+        and remote configuration for robotics competitions (OSHWDem)."
+        githubUrl="https://github.com/TMP-Robots/TMP-API"
+      />
+    </Section>
 
-    <Section title="Communities">
+    <Section title="Communities & Volunteering">
       <CommunityItem 
-        name="Bricolabs"
-        role="Active Member"
-        url="https://bricolabs.cc"
-        description="Collaboration on open-source hardware and software projects. 
-          Focused on 'learning by doing' and digital fabrication."
-        date="2022 — Present",
+        name="Wiki.js"
+        role="Open Source Contributor"
+        url="https://js.wiki"
+        description="Contributed to the localization of the platform by 
+          translating documentation and core interface elements into Galician."
+        date="2026 — Present"
+      />
+      <CommunityItem 
+        name="Universidade da Coruña (UDC)"
+        role="Peer Mentor"
+        description="Providing technical guidance and academic orientation to 
+          first-year Computer Science students. Helping them navigate the 
+          curriculum, tooling, and the university's technical ecosystem."
+        date="2025 — Present"
       />
       <CommunityItem 
         name="GPUL"
-        role="Active Member"
+        role="Member"
         url="https://gpul.org"
-        description="Universidade da Coruña's Open Source Software Users Group. 
-          Promoting Free Software culture and technical workshops."
-        date="2023 — Present",
+        description="Participating in the Free Software Users Group at 
+          Universidade da Coruña, promoting FOSS culture through technical 
+          workshops and seminars."
+        date="2023 — Present"
+      />
+      <CommunityItem 
+        name="OSHWDem (Open Source Hardware Coruña)"
+        role="Organizer & Judge"
+        url="https://oshwdem.org"
+        description="Core organizer for one of Spain's largest Open Hardware 
+          events (1,800+ attendees). Responsible for competition judging and 
+          developing technical infrastructure/services for the tournament 
+          stages."
+        date="2023 — Present"
+      />
+      <CommunityItem 
+        name="BricoLabs"
+        role="Active Member"
+        url="https://bricolabs.cc"
+        description="Proactive collaboration on OSHW projects. Developed 
+          numerous experiments in robotics, electronics and IoT."
+        date="2022 — Present"
       />
     </Section>
 

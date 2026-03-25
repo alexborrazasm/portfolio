@@ -6,7 +6,7 @@ interface Props {
   name: string;
   role: string;
   description: string;
-  url: string;
+  url?: string;
   date: string;
 }
 
@@ -21,7 +21,7 @@ const { name, role, description, url, date } = Astro.props;
           {name}
           <span class="role-badge">{role}</span>
         </h3>
-        <LinkGroup externalUrl={url} />
+        {url && <LinkGroup externalUrl={url} />}
       </div>
       
       <p class="description">
