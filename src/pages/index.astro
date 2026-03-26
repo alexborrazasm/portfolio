@@ -139,13 +139,16 @@ import PrintFooter from '../components/PrintFooter.astro';
       </div>
     </Section>
     
-    <PrintFooter/>
+    <PrintFooter 
+      fullUrl="https://example.com/" 
+      displayUrl="https://example.com/" 
+    />
 
   </main>
 
   <div class="download-btn-container">
     <a 
-      href="/api/generate-cv" 
+      href="/pdfs/alexandre-borrazas-en-cv.pdf" 
       download 
       class="download-btn"
     >

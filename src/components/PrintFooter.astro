@@ -1,7 +1,8 @@
 ---
-const { url } = Astro.request;
-const fullUrl = url.toString();
-const displayUrl = new URL(url).protocol + "//" + new URL(url).hostname;
+interface Props {
+  fullUrl: string;
+  displayUrl: string;
+}
 
 const generatedAt = new Date().toLocaleString("en-GB", {
   day: "2-digit",
@@ -10,6 +11,8 @@ const generatedAt = new Date().toLocaleString("en-GB", {
   hour: "2-digit",
   minute: "2-digit",
 });
+
+const { fullUrl, displayUrl } = Astro.props;
 ---
 
 <footer class="print-footer">

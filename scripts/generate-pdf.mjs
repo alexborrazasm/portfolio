@@ -1,52 +1,39 @@
-import type { APIRoute } from 'astro';
 import puppeteer from 'puppeteer';
-import type { Browser } from 'puppeteer';
+import fs from 'fs';
 
-export const prerender = false;
-
-export const GET: APIRoute = async ({ request, url }) => {
-  const langParam = url.searchParams.get('lang');
-  const lang = langParam === 'es' ? 'es' : 'en';
-
-  const origin = new URL(request.url).origin;
-  const targetPath = lang === 'es' ? '/es' : '/';
-  const targetUrl = `${origin}${targetPath}`;
-
-  let browser: Browser | undefined;
+async function generatePDF() {
+  // Launch browser with necessary arguments for CI environments
+  const browser = await puppeteer.launch({
+    headless: "new",
+    args: ['--no-sandbox', '--disable-setuid-sandbox']
+  });
 
   try {
-    browser = await puppeteer.launch({
-      headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
-    });
-
     const page = await browser.newPage();
-
+    
+    // Set viewport to match the CV design aspect ratio
     await page.setViewport({
       width: 900,
       height: 1600,
       deviceScaleFactor: 1
     });
-    
-    await page.goto(targetUrl, { waitUntil: 'networkidle0' });
+
+    // Navigate to the local preview server started by Astro
+    await page.goto('http://localhost:4321/', { waitUntil: 'networkidle0' });
     await page.emulateMediaType('print');
 
-    // INJECT STYLES: Scaling and visibility fixes
+    // INJECT STYLES: Ensure clean PDF output by hiding UI elements and fixing layout
     await page.addStyleTag({
       content: `
         .download-btn-container, .download-btn, nav, .hide-on-print { 
           display: none !important; 
         }
-
         .print-footer {
           display: flex !important;
           justify-content: center !important;
           width: 100% !important;
           margin-top: auto !important;
         }
-
-        /* Remove browser margins to prevent shifting */
-        /* And center content */
         body, html { 
           background: white !important; 
           margin: 0 !important;
@@ -56,27 +43,23 @@ export const GET: APIRoute = async ({ request, url }) => {
           justify-content: center;
           overflow: hidden;
         }
-        
         .cv-paper {
           box-shadow: none !important;
           border: none !important;
           margin: 0 !important;
-          padding: 30px !important; /* Real margin */
+          padding: 30px !important;
           width: 100% !important;
           max-width: none !important;
           min-height: 100% !important;
-          
-          /* Downsize content */
           zoom: 0.9; 
-          
           display: flex;
           flex-direction: column;
-          box-sizing: border-box; /* Padding dont affect total width/height */
+          box-sizing: border-box;
         }
       `
     });
 
-    // A4 standard 210 mm x 297 mm
+    // Generate PDF with A4-ish custom dimensions (210x355mm)
     const pdfBuffer = await page.pdf({
       width: '210mm',
       height: '355mm',
@@ -90,18 +73,19 @@ export const GET: APIRoute = async ({ request, url }) => {
       }
     });
 
-    const buffer = Buffer.from(pdfBuffer);
-    return new Response(buffer, {
-      headers: {
-        'Content-Type': 'application/pdf',
-        'Content-Disposition': 
-          `attachment; filename="alexandre-borrazas-cv-${lang}.pdf"`
-      }
-    });
+    // Ensure the output directory exists within the 'dist' folder
+    const dir = './dist/pdfs';
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    
+    fs.writeFileSync(`${dir}/alexandre-borrazas-en-cv.pdf`, pdfBuffer);
+    console.log(`✅ PDF generated successfully: alexandre-borrazas-en-cv.pdf`);
+
   } catch (error) {
-    console.error('Error generating PDF:', error);
-    return new Response('Error', { status: 500 });
+    console.error('❌ Error during PDF generation:', error);
+    process.exit(1);
   } finally {
-    if (browser) await browser.close();
+    await browser.close();
   }
-};
+}
+
+generatePDF();;
