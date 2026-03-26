@@ -1,0 +1,63 @@
+name: Deploy Portfolio and PDF CV
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Ensure only one deployment happens at a time
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: |
+          npm install
+          npm install wait-on --save-dev
+
+      - name: Build Astro Project
+        run: npm run build
+
+      - name: Generate PDF Resume
+        run: |
+          # 1. Start Astro preview server in the background
+          npm run preview & 
+          
+          # 2. Wait for the local server to be ready
+          # Note: We use the root '/' because with a Custom Domain, 'base' is usually '/'
+          npx wait-on http://localhost:4321/
+          
+          # 3. Run the PDF generator script
+          # REPLACE the URL below with your actual custom domain
+          node scripts/generate-pdf.mjs "https://tu-dominio-custom.com"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Only upload the production build folder
+          path: './dist'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
