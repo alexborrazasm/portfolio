@@ -15,12 +15,10 @@ const { title } = Astro.props;
 <style>
   @reference "../styles/global.css";
 
-  section {
-    @apply pb-2 mb-2;
-  }
+  section { @apply mb-1 last:mb-0; }
 
   h2 {
-    @apply text-xl font-bold text-accent border-b-2 border-slate-200 mb-4 
+    @apply text-xl font-bold text-accent border-b-2 border-slate-200 mb-1 
     uppercase tracking-wider;
   }
   
