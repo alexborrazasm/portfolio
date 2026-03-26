@@ -1,0 +1,61 @@
+---
+interface Props {
+  language: string;
+  level: string;
+  rating: 1 | 2 | 3 | 4 | 5;
+}
+
+const { language, level, rating } = Astro.props;
+const stars = Array.from({ length: 5 }, (_, i) => i + 1);
+---
+
+<div class="language-chip">
+  <div class="flex flex-col">
+    <span class="language-name">{language}</span>
+    <span class="level-text">{level}</span>
+  </div>
+
+  <div class="rating-dots" aria-label={`Level ${rating} of 5`}>
+    {stars.map((star) => (
+      <div 
+        class:list={[
+          "dot",
+          star <= rating ? "filled-dot" : "empty-dot"
+        ]}
+      />
+    ))}
+  </div>
+</div>
+
+<style>
+  @reference "../styles/global.css";
+
+  .language-chip {
+    @apply flex items-center gap-3 bg-slate-50/50 px-4 py-2 
+      rounded-lg border border-slate-100 w-full;
+  }
+
+  .language-name {
+    @apply text-sm font-bold text-slate-800 leading-none;
+  }
+
+  .level-text {
+    @apply text-[10px] uppercase tracking-wider text-slate-500 mt-1 leading-none;
+  }
+
+  .rating-dots {
+    @apply flex gap-1 ml-auto;
+  }
+
+  .dot {
+    @apply w-2.5 h-2.5 rounded-full border-[1.5px] border-accent;
+  }
+
+  .filled-dot {
+    @apply bg-accent;
+  }
+
+  .empty-dot {
+    @apply bg-transparent;
+  }
+</style>

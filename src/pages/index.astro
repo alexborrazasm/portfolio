@@ -5,6 +5,8 @@ import Section from '../components/Section.astro';
 import ExperienceItem from '../components/ExperienceItem.astro';
 import IconDownload from '../components/icons/IconDownload.astro';
 import CommunityItem from '../components/ComunityItem.astro';
+import LanguageItem from '../components/LanguajeItem.astro';
+import PrintFooter from '../components/PrintFooter.astro';
 ---
 
 <Layout title="Alexandre Borrazás Mancebo - Portfolio" lang="en">
@@ -25,7 +27,7 @@ import CommunityItem from '../components/ComunityItem.astro';
         declarative environments, I apply a maker mindset to solve complex 
         engineering challenges through clean and reproducible code."
     />
-    
+
     <Section title="Education">
       <ExperienceItem 
         title="Degree in Computer Engineering"
@@ -57,19 +59,6 @@ import CommunityItem from '../components/ComunityItem.astro';
     
     <Section title="Projects">
       <ExperienceItem 
-        title="Declarative Infrastructure & Home Lab"
-        company="Self-hosted NixOS Ecosystem"
-        date="2025 — Present"
-        description="Engineered a fully reproducible infrastructure using NixOS 
-          (Flakes) and Docker across VPS and on-premise nodes. Implemented 
-          declarative system configs, automated backups, and network segmentation 
-          with OpenWrt (VLANs). Focused on Infrastructure as Code (IaC) and 
-          maintaining services for the BricoLabs community."
-        githubUrl="https://github.com/alexborrazasm/nixos-dotfiles" 
-        skills={["NixOS", "Docker", "Proxmox", "GNU/Linux", "IaC", 
-          "Debian", "Restic", "Wireguard", "OpenWrt", "Git"]}
-      />
-      <ExperienceItem 
         title="ESP32 Telemetry & Robotics API"
         company="Personal Project / BricoLabs"
         date="2026 — Present"
@@ -80,6 +69,19 @@ import CommunityItem from '../components/ComunityItem.astro';
         githubUrl="https://github.com/TMP-Robots/TMP-API"
         skills={["ESP32", "C++", "Arduino", "API REST", "WebSockets", "IoT", 
           "Robotics", "API Design", "Git"]}
+      />
+      <ExperienceItem 
+        title="Declarative Infrastructure & Home Lab"
+        company="Self-hosted NixOS Ecosystem"
+        date="2024 — Present"
+        description="Engineered a fully reproducible infrastructure using NixOS 
+          (Flakes) and Docker across VPS and on-premise nodes. Implemented 
+          declarative system configs, automated backups, and network segmentation 
+          with OpenWrt (VLANs). Focused on Infrastructure as Code (IaC) and 
+          maintaining services for the BricoLabs community."
+        githubUrl="https://github.com/alexborrazasm/nixos-dotfiles" 
+        skills={["NixOS", "Docker", "Proxmox", "GNU/Linux", "IaC", 
+          "Debian", "Restic", "Wireguard", "OpenWrt", "Git"]}
       />
     </Section>
 
@@ -129,6 +131,16 @@ import CommunityItem from '../components/ComunityItem.astro';
       />
     </Section>
 
+    <Section title="Languages">
+      <div class="languages-wrapper">
+        <LanguageItem language="Spanish" level="Native" rating={5} />
+        <LanguageItem language="Galician" level="Native" rating={5} />
+        <LanguageItem language="English" level="Technical B1" rating={3} />
+      </div>
+    </Section>
+    
+    <PrintFooter/>
+
   </main>
 
   <div class="download-btn-container">
@@ -149,6 +161,10 @@ import CommunityItem from '../components/ComunityItem.astro';
   .cv-paper {
     @apply max-w-4xl mx-auto bg-white shadow-2xl md:rounded-md border 
       border-slate-200/50 min-h-[1100px] p-6 my-0 mb-8 md:p-12 md:my-6;
+  }
+  
+  .languages-wrapper {
+    @apply grid grid-cols-1 md:grid-cols-3 gap-4
   }
 
   .download-btn {

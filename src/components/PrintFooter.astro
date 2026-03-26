@@ -1,0 +1,38 @@
+---
+const { url } = Astro.request;
+const fullUrl = url.toString();
+const displayUrl = new URL(url).protocol + "//" + new URL(url).hostname;
+
+const generatedAt = new Date().toLocaleString("en-GB", {
+  day: "2-digit",
+  month: "2-digit",
+  year: "numeric",
+  hour: "2-digit",
+  minute: "2-digit",
+});
+---
+
+<footer class="print-footer">
+  <p>
+    Live version at <a href={fullUrl}>{displayUrl}</a> • 
+    Generated via Puppeteer at {generatedAt}
+  </p>
+</footer>
+
+<style>
+  @reference "../styles/global.css";
+
+  .print-footer {
+    @apply hidden justify-center w-full mt-6 pt-2 
+      border-t border-slate-100;
+  }
+
+  .print-footer p {
+    @apply text-[9px] text-slate-400 text-center font-sans tracking-tight;
+  }
+
+  .print-footer a {
+    @apply text-accent font-semibold no-underline hover:underline;
+  }
+
+</style>
