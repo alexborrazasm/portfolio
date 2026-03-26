@@ -15,6 +15,10 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+env:
+  # Opt-in to Node 24 for the internal runner to silence warnings
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -25,7 +29,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 25
+          node-version: 24
           cache: 'npm'
 
       - name: Install Dependencies
@@ -38,16 +42,18 @@ jobs:
 
       - name: Generate PDF Resume
         run: |
-          # 1. Start Astro preview server in the background
+          # 1. Start Astro preview server in the background and save PID
           npm run preview & 
+          SERVER_PID=$!
           
           # 2. Wait for the local server to be ready
-          # Note: We use the root '/' because with a Custom Domain, 'base' is usually '/'
-          npx wait-on http://localhost:4321/
+          npx wait-on http://localhost:4321/ --timeout 60000
           
           # 3. Run the PDF generator script
-          # REPLACE the URL below with your actual custom domain
-          node scripts/generate-pdf.mjs "https://tu-dominio-custom.com"
+          node scripts/generate-pdf.mjs
+          
+          # 4. Gracefully kill the background process to prevent "orphan" logs
+          kill $SERVER_PID
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -55,7 +61,6 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Only upload the production build folder
           path: './dist'
 
       - name: Deploy to GitHub Pages
