@@ -13,68 +13,55 @@ interface Props {
 const { name, role, description, url, date } = Astro.props;
 ---
 
-<div class="community-item page-break-inside-avoid">
+<div class="community-item">
   <div class="header">
-    <div class="title-group">
-      <div class="title-row">
-        <h3 class="name-title">
-          {name}
-          <span class="role-badge">{role}</span>
-        </h3>
-        {url && <LinkGroup externalUrl={url} />}
-      </div>
-      
-      <p class="description">
-        {description}
-      </p>
-
-      <a href={url}>
-      </a>
-
+    <div class="title-row">
+      <h3 class="name-title">
+        {name}
+        <span class="role-badge">{role}</span>
+      </h3>
+      <LinkGroup externalUrl={url} />
     </div>
-
-    <DateBadge date={date} /> </div>
+    
+    <div class="date-wrapper">
+      <DateBadge date={date} />
+    </div>
   </div>
+
+  <p class="description">
+    {description}
+  </p>
 </div>
 
 <style>
   @reference "../styles/global.css";
 
   .community-item {
-    @apply mb-2 last:mb-0;
+    @apply mb-3 last:mb-0;
   }
 
   .header {
-    @apply flex justify-between items-start gap-4;
-  }
-
-  .title-group {
-    @apply flex-1;
+    @apply flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-1; 
   }
 
   .title-row {
-    @apply flex items-center gap-3 flex-wrap;
+    @apply flex items-center gap-2 flex-wrap flex-1;
   }
 
   .name-title {
-    @apply font-bold text-slate-900 group-hover:text-accent transition-colors 
-      flex items-center gap-2 text-base md:text-lg;
+    @apply font-bold text-slate-900 group-hover:text-blue-600 transition-colors 
+      flex items-center gap-2 text-base;
   }
 
   .role-badge {
     @apply text-[10px] uppercase tracking-wider font-bold bg-slate-100 
-      text-slate-600 px-2 py-0.5 rounded border border-slate-200 
-      group-hover:bg-accent/10 group-hover:text-accent 
-      group-hover:border-accent/20;
+      text-slate-600 px-1.5 py-0.5 rounded border border-slate-200 
+      group-hover:bg-blue-50 group-hover:text-blue-600 
+      group-hover:border-blue-200 transition-all;
   }
+
 
   .description {
-    @apply text-sm text-slate-600 mt-1 leading-relaxed;
+    @apply text-sm text-slate-600 mt-0.5 leading-snug;
   }
-
-  .date-badge { 
-    @apply text-sm font-bold text-slate-500 tabular-nums bg-slate-100 px-2 
-      py-0.5 rounded sm:bg-transparent sm:p-0;
-  }
-
 </style>

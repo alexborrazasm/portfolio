@@ -1,0 +1,32 @@
+---
+interface Props {
+  skills?: string[];
+}
+
+const { skills } = Astro.props;
+---
+
+{skills && skills.length > 0 && (
+  <div class="skills-container">
+    {skills.map((skill) => (
+      <span class="skill-badge">{skill}</span>
+    ))}
+  </div>
+)}
+
+<style>
+  @reference "../styles/global.css";
+  
+  .skills-container {
+    @apply mt-2 flex flex-wrap gap-1.5;
+  }
+
+  .skill-badge {
+    @apply bg-white text-slate-600 px-2.5 py-0.5 rounded-md text-sm font-semibold 
+      border border-slate-200 transition-all duration-200 cursor-default select-none;
+    
+    &:hover {
+      @apply border-blue-400 text-accent shadow-sm -translate-y-[1px] bg-blue-50/50;
+    }
+  }
+</style>

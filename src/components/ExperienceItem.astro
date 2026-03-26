@@ -1,19 +1,21 @@
 ---
 import LinkGroup from './LinkGroup.astro';
 import DateBadge from './DateBadge.astro';
+import SkillBadge from './SkillBadge.astro';
 
 interface Props {
   title: string;
   company: string;
   date: string;
   description: string;
+  skills?: string[];
   githubUrl?: string;
   githubUrlLabel?: string;
   externalUrl?: string;
   externalUrlLabel?: string;
 }
 
-const { title, company, date, description, ...links } = Astro.props;
+const { title, company, date, description, skills, ...links } = Astro.props;
 ---
 
 <div class="experience-item">
@@ -25,11 +27,15 @@ const { title, company, date, description, ...links } = Astro.props;
       </div>
       <p class="company-name">{company}</p>
     </div>
-    <DateBadge date={date} /> </div>
+    <DateBadge date={date} />
+  </div>
   
   <p class="description">
     {description}
   </p>
+
+  <SkillBadge skills={skills} />
+
 </div>
 
 <style>
