@@ -13,9 +13,9 @@ async function generatePDF() {
     
     // Set viewport to match the CV design aspect ratio
     await page.setViewport({
-      width: 900,
-      height: 1600,
-      deviceScaleFactor: 1
+      width: 1200,
+      height: 2000,
+      deviceScaleFactor: 2
     });
 
     // Navigate to the local preview server started by Astro
@@ -64,6 +64,7 @@ async function generatePDF() {
       width: '210mm',
       height: '355mm',
       printBackground: true,
+      preferCSSPageSize: true,
       displayHeaderFooter: false,
       margin: {
         top: '0px',
