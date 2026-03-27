@@ -26,7 +26,7 @@ const currentYear = new Date().getFullYear();
   @reference "../styles/global.css"; 
 
   .footer-container {
-    @apply flex items-center justify-center gap-4 py-8;
+    @apply flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 py-8;
   }
 
   .github-link {
@@ -39,11 +39,11 @@ const currentYear = new Date().getFullYear();
   }
 
   .divider {
-    @apply text-slate-300 text-xs;
+    @apply text-slate-300 text-xs hidden sm:inline;
   }
 
   .credits {
-    @apply text-slate-400 text-xs;
+    @apply text-slate-400 text-xs text-center;
   }
 
 </style>
