@@ -17,6 +17,9 @@ const { title, lang } = Astro.props;
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 		<title>{title}</title>
 	</head>
 	<body>
@@ -36,5 +39,11 @@ const { title, lang } = Astro.props;
     background-color: slate-950;
     background-image: radial-gradient(circle at 50% -20%, #1e293b, #020617);
     background-attachment: fixed;
+  }
+</style>
+
+<style is:global>
+  body {
+    font-family: 'Inter', sans-serif;
   }
 </style>
