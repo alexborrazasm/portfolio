@@ -51,7 +51,6 @@ async function generatePDF() {
           width: 100% !important;
           max-width: none !important;
           min-height: 100% !important;
-          zoom: 0.9; 
           display: flex;
           flex-direction: column;
           box-sizing: border-box;
@@ -59,8 +58,9 @@ async function generatePDF() {
       `
     });
 
-    // Generate PDF with A4-ish custom dimensions (210x355mm)
+    // Generate PDF with A4-ish custom dimensions and native scaling
     const pdfBuffer = await page.pdf({
+      scale: 0.9,
       width: '210mm',
       height: '355mm',
       printBackground: true,
@@ -89,4 +89,4 @@ async function generatePDF() {
   }
 }
 
-generatePDF();;
+generatePDF();
