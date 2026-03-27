@@ -4,7 +4,7 @@ import fs from 'fs';
 async function generatePDF() {
   // Launch browser with necessary arguments for CI environments
   const browser = await puppeteer.launch({
-    headless: "new",
+    headless: "shell",
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
 
@@ -60,7 +60,7 @@ async function generatePDF() {
 
     // Generate PDF with A4-ish custom dimensions and native scaling
     const pdfBuffer = await page.pdf({
-      scale: 0.87,
+      scale: 0.9,
       width: '210mm',
       height: '355mm',
       printBackground: true,
