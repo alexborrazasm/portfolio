@@ -4,7 +4,7 @@ import fs from 'fs';
 async function generatePDF() {
   // Launch browser with necessary arguments for CI environments
   const browser = await puppeteer.launch({
-    headless: "shell",
+    headless: "new",
     args: ['--no-sandbox', '--disable-setuid-sandbox']
   });
 
