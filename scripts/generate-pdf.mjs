@@ -60,9 +60,9 @@ async function generatePDF() {
 
     // Generate PDF with A4-ish custom dimensions and native scaling
     const pdfBuffer = await page.pdf({
-      scale: 0.9,
+      scale: 0.88,
       width: '210mm',
-      height: '355mm',
+      height: '350mm',
       printBackground: true,
       preferCSSPageSize: true,
       displayHeaderFooter: false,
